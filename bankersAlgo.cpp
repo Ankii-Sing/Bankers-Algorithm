@@ -4,13 +4,13 @@ using namespace std;
 int maxRequirement[10][10], allocation[10][10], need[10][10];
 int avail[10];
 int np, nr;
-
+// this will take input and store into the passed matrix.
 void readMatrix(int matrix[10][10]) {
     for (int i = 0; i < np; i++)
         for (int j = 0; j < nr; j++)
             cin >> matrix[i][j];
 }
-
+// this fun will display the passed matrix.
 void displayMatrix(int matrix[10][10]) {
     for (int i = 0; i < np; i++) {
         cout << "\n P" << i << "\t";
@@ -19,13 +19,14 @@ void displayMatrix(int matrix[10][10]) {
         }
     }
 }
-
+// this fun will caculate the need matrix for processes, max - allocatino.
 void calculateNeed() {
     for (int i = 0; i < np; i++)
         for (int j = 0; j < nr; j++)
             need[i][j] = maxRequirement[i][j] - allocation[i][j];
 }
 
+// this will find the safe sequence for the processes into the safe_seq array.
 void banker() {
     int finish[10] = {0}, safeSeq[10], k = 0, flag;
 
@@ -47,7 +48,7 @@ void banker() {
             }
         }
     }
-
+// if some of proccess still left un allocated , it means they cant be schedulded therefore deadlock can occur.
     flag = 0;
     for (int i = 0; i < np; i++) {
         if (finish[i] == 0) {
@@ -56,6 +57,7 @@ void banker() {
             break;
         }
     }
+    // if system is not in deadlock , Display the safe sequence.
 
     if (flag == 0) {
         cout << "\n The system is in a safe state! \n Safe sequence is ==> ";
@@ -100,3 +102,5 @@ int main() {
     cout << "\n\n\n";
     return 0;
 }
+
+/// input
